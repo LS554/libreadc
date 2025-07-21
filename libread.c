@@ -1,6 +1,9 @@
 // Copyright (c) 2025, London Sheard
 // Licensed under the 3-Clause Sheard License
 // See the LICENSE file in project root for details.
+//
+// Created by London Sheard on 21/07/25.
+//
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,7 +22,7 @@
  * @param size Size of the buffer.
  * @return 1 on success, -1 on error.
  */
-int read(char* string, const size_t size) {
+int readln(char* string, const size_t size) {
     if (fgets(string, size, stdin) == NULL) {
         return -1;
     }
@@ -45,7 +48,7 @@ int read(char* string, const size_t size) {
  * @param string Pointer to a char* that will hold the allocated string.
  * @return 1 on success, 0 on error.
  */
-int readm(char** string) {
+int readlnm(char** string) {
     size_t size = 128;
     size_t len = 0;
     char* buffer = malloc(size);
