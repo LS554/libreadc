@@ -15,4 +15,8 @@ int main() {
     printf("%s", allocbuffer);
     free(allocbuffer);
     /* use after free!!! printf("%s", allocbuffer); */
+
+    char* a = malloc(100);
+    char* b = malloc(100);
+    freeall(2, &a, &b);
 }

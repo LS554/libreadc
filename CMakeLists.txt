@@ -3,6 +3,8 @@ project(libread C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(test libread.c
-        test.c
+add_executable(test
+        src/libread.c
+        src/test.c
+
 )

@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdarg.h>
 
 /**
  * Reads a line from stdin into `string`.
@@ -20,18 +21,18 @@
  * }
  * @param string Char array buffer to store input.
  * @param size Size of the buffer.
- * @return 1 on success, -1 on error.
+ * @return 0 on success, 1 on error.
  */
 int readln(char* string, const size_t size) {
     if (fgets(string, size, stdin) == NULL) {
-        return -1;
+        return 1;
     }
     const size_t len = strlen(string);
 
     if (len > 0 && string[len -1] == '\n') {
         string[len -1] = '\0';
     }
-    return 1;
+    return 0;
 }
 
 /**
@@ -46,18 +47,18 @@ int readln(char* string, const size_t size) {
  * }
  * @warning MUST FREE
  * @param string Pointer to a char* that will hold the allocated string.
- * @return 1 on success, 0 on error.
+ * @return 0 on success, 1 on error.
  */
 int readlnm(char** string) {
     size_t size = 128;
     size_t len = 0;
     char* buffer = malloc(size);
-    if (!buffer) return 0;
+    if (!buffer) return 1;
 
     while (1) {
         if (fgets(buffer + len, size - len, stdin) == NULL) {
             free(buffer);
-            return 0;
+            return 1;
         }
 
         len += strlen(buffer + len);
@@ -70,7 +71,7 @@ int readlnm(char** string) {
         char* new_buffer = realloc(buffer, new_size);
         if (!new_buffer) {
             free(buffer);
-            return 0;
+            return 1;
         }
         buffer = new_buffer;
         size = new_size;
@@ -78,6 +79,31 @@ int readlnm(char** string) {
     char* final_str = realloc(buffer, len + 1);
     if (final_str) buffer = final_str;
     *string = buffer;
-    return 1;
+    return 0;
+}
 
+/**
+ * Frees all provided pointers (sets them to NULL after freeing)
+ *
+ * Usage:
+ * char* a = malloc(100);
+ * char* b = malloc(100);
+ * freeall(2, &a, &b);
+ * @param count Number of provided pointers.
+ * @param ... pointers to pointers (e.g., &a, &b).
+ * @return 0 on success, 1 on error.
+ */
+int freeall(const int count, ...) {
+    va_list args;
+    va_start(args, count);
+
+    for (int i = 0; i < count; i++) {
+        void **ptr = va_arg(args, void **);
+        if (ptr && *ptr) {
+            free(*ptr);
+            *ptr = NULL;
+        }
+    }
+    va_end(args);
+    return 0;
 }
