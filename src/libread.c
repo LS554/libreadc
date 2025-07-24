@@ -16,7 +16,7 @@
  *
  * Usage:
  * char buffer[1024];
- * if (read(buffer, sizeof(buffer))) {
+ * if (readln(buffer, sizeof(buffer))) {
  *     // use buffer
  * }
  * @param string Char array buffer to store input.
@@ -36,12 +36,12 @@ int readln(char* string, const size_t size) {
 }
 
 /**
- * Reads a line from stdin into a dynamically allocated buffer.
+ * Reads a line from stdin into a dynamically allocated buffer `string`.
  * Removes the trailing newline if present.
  *
  * Usage:
  * char* buffer;
- * if (readm(&buffer)) {
+ * if (readlnm(&buffer)) {
  *     // use buffer
  *     free(buffer);
  * }
