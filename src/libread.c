@@ -53,20 +53,29 @@ int readlnm(char** string) {
     size_t size = 128;
     size_t len = 0;
     char* buffer = malloc(size);
-    if (!buffer) return 1;
+    if (!buffer)
+        return 1;
 
     while (1) {
+        // Read into the buffer starting at offset 'len'
         if (fgets(buffer + len, size - len, stdin) == NULL) {
             free(buffer);
             return 1;
         }
+        
+        // Determine length of the newly read chunk and update len.
+        size_t chunk_len = strlen(buffer + len);
+        len += chunk_len;
 
-        len += strlen(buffer + len);
-
+        // If the last character is newline, replace it with a null terminator and break.
         if (len > 0 && buffer[len - 1] == '\n') {
+            buffer[len - 1] = '\0';
             len--;
             break;
         }
+
+        // If no newline, it means that the input line is longer than the available space.
+        // Double the buffer size to read more.
         size_t new_size = size * 2;
         char* new_buffer = realloc(buffer, new_size);
         if (!new_buffer) {
@@ -76,8 +85,11 @@ int readlnm(char** string) {
         buffer = new_buffer;
         size = new_size;
     }
+
+    // Optionally, shrink the buffer to fit the string exactly.
     char* final_str = realloc(buffer, len + 1);
-    if (final_str) buffer = final_str;
+    if (final_str)
+        buffer = final_str;
     *string = buffer;
     return 0;
 }
