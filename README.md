@@ -18,5 +18,5 @@ if (readlnm(&buffer)) {
 ```
 Compile your programme with:
 ```
-gcc -lreadc ...
+gcc main.c -lreadc -o main
 ```
