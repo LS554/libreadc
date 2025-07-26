@@ -6,7 +6,7 @@ project(libread C)
 set(CMAKE_C_STANDARD 11)
 
 add_executable(test
-        src/libread.c
-        src/test.c
+        src/libreadc.c
+        example.c
 
 )
