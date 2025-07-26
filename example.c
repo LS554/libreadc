@@ -3,7 +3,7 @@
 //
 #include <stdio.h>
 #include <stdlib.h>
-#include "libread.h"
+#include "libreadc.h"
 
 int main() {
     char buffer[1024];
