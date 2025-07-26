@@ -16,7 +16,12 @@ if (readlnm(&buffer) == 0) {
     free(buffer);
 }
 ```
-Compile your programme with:
+## Compiling your programme
+#### Using static library:
+```
+gcc main.c libreadc.a -o main
+```
+#### If installed system-wide: 
 ```
 gcc main.c -lreadc -o main
 ```
