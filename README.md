@@ -17,6 +17,7 @@ if (readlnm(&buffer) == 0) {
 }
 ```
 ## Compiling your programme
+Download the library in [releases](https://github.com/LS554/libreadc/releases)
 #### Using static library:
 ```
 gcc main.c libreadc.a -o main
