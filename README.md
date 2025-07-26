@@ -5,13 +5,13 @@
 readln - Reads a line from stdin into `string`. Removes the trailing newline if present.
 ```
 char buffer[1024];
-if (readln(buffer, sizeof(buffer))) {
+if (readln(buffer, sizeof(buffer)) == 0) {
     // use buffer
 }
 ```
 readlnm - Reads a line from stdin into a dynamically allocated buffer `string`. Removes the trailing newline if present.
 ```
-if (readlnm(&buffer)) {
+if (readlnm(&buffer) == 0) {
     // use buffer
     free(buffer);
 }
