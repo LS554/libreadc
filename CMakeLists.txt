@@ -1,4 +1,4 @@
-#this is mainly a dummy for jetbrains ide
+#this is mainly a dummy for jetbrains ide, use makefile `src/library.mak` to compile library
 
 cmake_minimum_required(VERSION 3.31)
 project(libread C)
