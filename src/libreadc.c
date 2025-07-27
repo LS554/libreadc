@@ -23,7 +23,7 @@
  * }
  * @param string Char array buffer to store input.
  * @param size Size of the buffer.
- * @return 0 on success, 1 on error.
+ * @return 0 on success, 1 on error, -1 on overflow.
  */
 int readln(char* string, const size_t size) {
     if (fgets(string, size, stdin) == NULL) {
@@ -33,6 +33,10 @@ int readln(char* string, const size_t size) {
 
     if (len > 0 && string[len -1] == '\n') {
         string[len -1] = '\0';
+    } else {
+        int ch;
+        while ((ch = getchar) != '\n' && ch != EOF); // flush buffer to prevent overflow
+        return -1;
     }
     return 0;
 }
