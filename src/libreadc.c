@@ -35,7 +35,7 @@ int readln(char* string, const size_t size) {
         string[len -1] = '\0';
     } else {
         int ch;
-        while ((ch = getchar) != '\n' && ch != EOF); // flush buffer to prevent overflow
+        while ((ch = getchar()) != '\n' && ch != EOF); // flush buffer to prevent overflow
         return -1;
     }
     return 0;
