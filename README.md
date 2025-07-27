@@ -11,6 +11,7 @@ if (readln(buffer, sizeof(buffer)) == 0) {
 ```
 readlnm - Reads a line from stdin into a dynamically allocated buffer (automatically resizes). Removes the trailing newline if present.
 ```
+char* buffer = NULL;
 if (readlnm(&buffer) == 0) {
     // use buffer
     free(buffer);
