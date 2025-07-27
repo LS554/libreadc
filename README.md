@@ -2,7 +2,7 @@
  c library for user input
 
 # Usage
-readln - Reads a line from stdin into a preallocated buffee. Removes the trailing newline if present.
+readln - Reads a line from stdin into a preallocated buffer. Removes the trailing newline if present.
 ```
 char buffer[1024];
 if (readln(buffer, sizeof(buffer)) == 0) {
