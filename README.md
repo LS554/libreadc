@@ -22,7 +22,7 @@ getch (implementation) - get character input without waiting for return
 int ch = getch();
 printf("%d", ch);
 ```
-freeall - frees and zeroes all provided pointers (takes count and pointers to pointers)
+freeall - frees and zeroes all provided pointers (takes count and pointer to each pointer)
 ```
 char* a = malloc(100);
 char* b = malloc(100);
