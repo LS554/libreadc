@@ -10,6 +10,8 @@ int readln(char* string, size_t size);
 
 int readlnm(char** string);
 
+int getch(void);
+
 int freeall(int count, ...);
 
 #endif //LIBREAD_H

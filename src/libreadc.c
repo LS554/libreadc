@@ -9,6 +9,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>
+#include <termios.h>
+#include <unistd.h>
 
 /**
  * Reads a line from stdin into `string`.
@@ -92,6 +94,39 @@ int readlnm(char** string) {
         buffer = final_str;
     *string = buffer;
     return 0;
+}
+
+/**
+ * Reads a single character from standard input without requiring a newline and without printing the character.
+ *
+ * Temporarily modifies the terminal attributes by disabling canonical mode (ICANON) and local echo (ECHO).
+ * Restores the original terminal settings after reading.
+ *
+ * Usage:
+ * int ch = getch();
+ *
+ * @return The character read as an int, or EOF on error.
+ */
+int getch() {
+    struct termios oldattr, newattr;
+    int ch;
+
+    // get term settings
+    tcgetattr(STDIN_FILENO, &oldattr);
+    newattr = oldattr;
+
+    // disable line buffering
+    newattr.c_lflag &= ~(ICANON | ECHO);
+
+    // apply
+    tcsetattr(STDIN_FILENO, TCSANOW, &newattr);
+
+    ch = getchar();
+
+    // restore term
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldattr);
+
+    return ch;
 }
 
 /**
