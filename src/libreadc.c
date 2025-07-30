@@ -151,7 +151,7 @@ static long int get_size(FILE* file) {
  *
  * @warning free after use
  * @param file FILE* pointer to file stream.
- * @param option boolean - cut or leave trailing newline
+ * @param option _Bool - cut or leave trailing newline
  * @return char* on success, NULL on error
  */
 char* read_file(FILE* file, _Bool option) {
