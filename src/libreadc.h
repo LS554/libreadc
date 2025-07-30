@@ -4,7 +4,6 @@
 
 #ifndef LIBREAD_H
 #define LIBREAD_H
-#include <stddef.h>
 
 int readln(char* string, size_t size);
 

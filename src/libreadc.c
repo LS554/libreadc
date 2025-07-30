@@ -143,7 +143,7 @@ static long int get_size(FILE* file) {
 }
 
 /**
- * Reads an entire file `file`, removes ending newline, and returns as char array.
+ * Reads an entire file `file`, removes ending newline based on OPTION, and returns as char array.
  *
  * Usage:
  * FILE* file = fopen("filename", "r");
