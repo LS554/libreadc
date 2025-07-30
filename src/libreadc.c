@@ -155,34 +155,34 @@ static long int get_size(FILE* file) {
  * @return char* on success, NULL on error
  */
 char* read_file(FILE* file, _Bool option) {
-    long int size = get_size(file);
-    if (!size) {
+    long int fsize = get_size(file);
+    if (!fsize) {
         return NULL;
     }
-    if (size == -1) {
+    if (fsize == -1) {
         return NULL;
     }
 
-    char* buffer = malloc(size +1);
+    char* buffer = malloc(fsize +1);
     if (!buffer) {
         return NULL;
     }
 
-    size_t read = fread(buffer, 1, size, file);
-    if (!read) {
+    size_t cssize = fread(buffer, 1, fsize, file);
+    if (!cssize) {
         return NULL;
     }
-    if (read != size) {
+    if (cssize != fsize) {
         free(buffer);
         return NULL;
     }
 
-    size_t len = strlen(buffer);
     if (option == 1) {
-        if (buffer[len -1] == '\n') {
-            buffer[len -1] = '\0';
-        }
+	if (buffer[cssize -1] == '\n') {
+	    buffer[cssize -1] = '\0';
+	}
     }
+
 
     return buffer;
 }
