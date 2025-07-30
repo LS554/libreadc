@@ -44,4 +44,6 @@ int main(int argc, char** argv) {
     }
     char* string = read_file(file, 1);
     printf("%s : %s : %ld bytes\n", argv[1], string, strlen(string));
+    fclose(file);
+    free(string);
 }
