@@ -107,13 +107,13 @@ int readlnm(char** string) {
  * Restores the original terminal settings after reading.
  *
  * Usage:
- * int ch = getch();
+ * int ci = getch();
+ * char c = (char)ci;
  *
  * @return The character read as an int, or EOF on error.
  */
 int getch() {
     struct termios oldattr, newattr;
-    int ch;
 
     // get term settings
     tcgetattr(STDIN_FILENO, &oldattr);
@@ -125,13 +125,68 @@ int getch() {
     // apply
     tcsetattr(STDIN_FILENO, TCSANOW, &newattr);
 
-    ch = getchar();
+    int ch = getchar();
 
     // restore term
     tcsetattr(STDIN_FILENO, TCSANOW, &oldattr);
 
     return ch;
 }
+
+/* get size of file -> f()read_file */
+static long int get_size(FILE* file) {
+    fseek(file, 0, SEEK_END);
+    const long int size = ftell(file);
+    rewind(file);
+
+    return size;
+}
+
+/**
+ * Reads an entire file `file`, removes ending newline, and returns as char array.
+ *
+ * Usage:
+ * FILE* file = fopen("filename", "r");
+ * char* string = read_file(file);
+ *
+ * @warning free after use
+ * @param file FILE* pointer to file stream.
+ * @param option boolean - cut or leave trailing newline
+ * @return char* on success, NULL on error
+ */
+char* read_file(FILE* file, _Bool option) {
+    long int size = get_size(file);
+    if (!size) {
+        return NULL;
+    }
+    if (size == -1) {
+        return NULL;
+    }
+
+    char* buffer = malloc(size +1);
+    if (!buffer) {
+        return NULL;
+    }
+
+    size_t read = fread(buffer, 1, size, file);
+    if (!read) {
+        return NULL;
+    }
+    if (read != size) {
+        free(buffer);
+        return NULL;
+    }
+
+    size_t len = strlen(buffer);
+    if (option == 1) {
+        if (buffer[len -1] == '\n') {
+            buffer[len -1] = '\0';
+        }
+    }
+
+    return buffer;
+}
+
 
 /**
  * Frees all provided pointers (sets them to NULL after freeing)

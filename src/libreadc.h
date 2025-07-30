@@ -12,6 +12,8 @@ int readlnm(char** string);
 
 int getch(void);
 
+char* read_file(FILE* file, _Bool option);
+
 int freeall(int count, ...);
 
 #endif //LIBREAD_H
