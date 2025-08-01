@@ -46,4 +46,17 @@ int main(int argc, char** argv) {
     printf("%s : %s : %ld bytes\n", argv[1], string, strlen(string));
     fclose(file);
     free(string);
+
+    FILE* file2 = fopen(argv[1], "r");
+    if (!file) {
+	char errormsg[256];
+	snprintf(errormsg, sizeof(errormsg), "Could not read file `%s`", argv[1]);
+	perror(errormsg);
+	return 1;
+    }
+
+    char* string2 = read_filec(file, 1);
+    fclose(file2);
+    printf("%s", string2);
+    free(string2);
 }

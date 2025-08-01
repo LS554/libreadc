@@ -159,9 +159,6 @@ char* read_file(FILE* file, _Bool option) {
     if (!fsize) {
         return NULL;
     }
-    if (fsize == -1) {
-        return NULL;
-    }
 
     char* buffer = malloc(fsize +1);
     if (!buffer) {
@@ -182,8 +179,46 @@ char* read_file(FILE* file, _Bool option) {
 	    buffer[cssize -1] = '\0';
 	}
     }
+    return buffer;
+}
 
+/**
+ * Reads an entire file `file` as individual characters, removes ending newline based on OPTION, and returns as char array.
+ *
+ * Usage:
+ * FILE* file = fopen("filename", "r");
+ * char* string = read_file(file);
+ *
+ * @warning free after use
+ * @param file FILE* pointer to file stream.
+ * @param option _Bool - cut or leave trailing newline
+ * @return char* on success, NULL on error
+ */
+char* read_filec(FILE* file, _Bool option) {
+    long int fsize = get_size(file);
+    if (!fsize) {
+	return NULL;
+    }
 
+    char* buffer = malloc(fsize +1);
+    if (!buffer) {
+	return NULL;
+    }
+
+    int ci;
+    for (long i = 0; i < fsize; i++) {
+	ci = fgetc(file);
+	if (ci == EOF) {
+	    return NULL;
+	}
+	buffer[i] = (char)ci;
+    }
+
+    if (option == 1) {
+	if (buffer[fsize -1] == '\n') {
+	    buffer[fsize -1] = '\0';
+	}
+    }
     return buffer;
 }
 
