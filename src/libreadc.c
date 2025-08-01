@@ -14,7 +14,7 @@
 
 /**
  * Reads a line from stdin into `string`.
- * Removes the trailing newline if present.
+ * Removes the trailing newline if present, and flushes stdin.
  *
  * Usage:
  * char buffer[1024];
