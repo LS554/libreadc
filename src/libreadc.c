@@ -101,6 +101,7 @@ int readlnm(char** string) {
 }
 
 /**
+ * Getch implementation.
  * Reads a single character from standard input without requiring a newline and without printing the character.
  *
  * Temporarily modifies the terminal attributes by disabling canonical mode (ICANON) and local echo (ECHO).
@@ -110,7 +111,7 @@ int readlnm(char** string) {
  * int ci = getch();
  * char c = (char)ci;
  *
- * @return The character read as an int, or EOF on error.
+ * @return The character read as an int.
  */
 int getch() {
     struct termios oldattr, newattr;
@@ -224,7 +225,7 @@ char* read_filec(FILE* file, _Bool option) {
 
 
 /**
- * Frees all provided pointers (sets them to NULL after freeing)
+ * Frees and nulls all provided pointers.
  *
  * Usage:
  * char* a = malloc(100);
