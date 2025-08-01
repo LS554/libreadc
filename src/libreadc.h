@@ -5,16 +5,20 @@
 #ifndef LIBREAD_H
 #define LIBREAD_H
 
-int readln(char* string, size_t size);
+#include <stdio.h>
+#include <stddef.h>
+#include <stdbool.h>
 
-int readlnm(char** string);
+int ReadLine(char* string, size_t size);
+
+int ReadLinem(char** string);
 
 int getch(void);
 
-char* read_file(FILE* file, _Bool option);
+char* ReadFile(FILE* file, _Bool option);
 
-char* read_filec(FILE* file, _Bool option);
+char* ReadFilec(FILE* file, _Bool option);
 
-int freeall(int count, ...);
+int FreeAll(int count, ...);
 
 #endif //LIBREAD_H

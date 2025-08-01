@@ -18,14 +18,14 @@
  *
  * Usage:
  * char buffer[1024];
- * if (readln(buffer, sizeof(buffer)) == 0) {
+ * if (ReadLine(buffer, sizeof(buffer)) == 0) {
  *     // use buffer
  * }
  * @param string Char array buffer to store input.
  * @param size Size of the buffer.
  * @return 0 on success, 1 on error, -1 on overflow.
  */
-int readln(char* string, const size_t size) {
+int ReadLine(char* string, const size_t size) {
     if (fgets(string, size, stdin) == NULL) {
         return 1;
     }
@@ -47,7 +47,7 @@ int readln(char* string, const size_t size) {
  *
  * Usage:
  * char* buffer;
- * if (readlnm(&buffer) == 0) {
+ * if (ReadLinem(&buffer) == 0) {
  *     // use buffer
  *     free(buffer);
  * }
@@ -55,7 +55,7 @@ int readln(char* string, const size_t size) {
  * @param string Pointer to a char* that will hold the allocated string.
  * @return 0 on success, 1 on error.
  */
-int readlnm(char** string) {
+int ReadLinem(char** string) {
     size_t size = 128;
     size_t len = 0;
     char* buffer = malloc(size);
@@ -101,7 +101,7 @@ int readlnm(char** string) {
 }
 
 /**
- * Getch implementation.
+ * Getch (implementation).
  * Reads a single character from standard input without requiring a newline and without printing the character.
  *
  * Temporarily modifies the terminal attributes by disabling canonical mode (ICANON) and local echo (ECHO).
@@ -135,7 +135,7 @@ int getch() {
 }
 
 /* get size of file -> f()read_file */
-static long int get_size(FILE* file) {
+static long int GetSize(FILE* file) {
     fseek(file, 0, SEEK_END);
     const long int size = ftell(file);
     rewind(file);
@@ -148,15 +148,15 @@ static long int get_size(FILE* file) {
  *
  * Usage:
  * FILE* file = fopen("filename", "r");
- * char* string = read_file(file);
+ * char* string = ReadFile(file);
  *
  * @warning free after use
  * @param file FILE* pointer to file stream.
  * @param option _Bool - cut or leave trailing newline
  * @return char* on success, NULL on error
  */
-char* read_file(FILE* file, _Bool option) {
-    long int fsize = get_size(file);
+char* ReadFile(FILE* file, _Bool option) {
+    long int fsize = GetSize(file);
     if (!fsize) {
         return NULL;
     }
@@ -188,15 +188,15 @@ char* read_file(FILE* file, _Bool option) {
  *
  * Usage:
  * FILE* file = fopen("filename", "r");
- * char* string = read_file(file);
+ * char* string = ReadFilec(file);
  *
  * @warning free after use
  * @param file FILE* pointer to file stream.
  * @param option _Bool - cut or leave trailing newline
  * @return char* on success, NULL on error
  */
-char* read_filec(FILE* file, _Bool option) {
-    long int fsize = get_size(file);
+char* ReadFilec(FILE* file, _Bool option) {
+    long int fsize = GetSize(file);
     if (!fsize) {
 	return NULL;
     }
@@ -230,12 +230,12 @@ char* read_filec(FILE* file, _Bool option) {
  * Usage:
  * char* a = malloc(100);
  * char* b = malloc(100);
- * freeall(2, &a, &b);
+ * FreeAll(2, &a, &b);
  * @param count Number of provided pointers.
  * @param ... pointers to pointers (e.g., &a, &b).
  * @return 0 on success, 1 on error.
  */
-int freeall(const int count, ...) {
+int FreeAll(const int count, ...) {
     va_list args;
     va_start(args, count);
 
