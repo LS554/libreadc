@@ -19,6 +19,8 @@ char* ReadFile(FILE* file, _Bool option);
 
 char* ReadFilec(FILE* file, _Bool option);
 
+char* Trim(char* string, unsigned int trim_len);
+
 int FreeAll(int count, ...);
 
 #endif //LIBREAD_H
