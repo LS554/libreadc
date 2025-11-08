@@ -225,6 +225,31 @@ char* ReadFilec(FILE* file, _Bool option) {
 
 
 /**
+ * Trims string to provided ending size.
+ * Usage:
+ * char* out = Trim(char* in, unsigned int trim_len);
+ *
+ * @param char* in - input string
+ * @param option unsigned int trim_len - end length to leave
+ * @return char* out on success; in on overflow
+ */
+char* Trim(char input[], size_t trim_size) {
+    size_t old_len = strlen(input);
+	if (trim_size > old_len) {trim_size = old_len;}
+	
+    char* new = malloc(trim_size + 1);
+
+    for (size_t i = 0; i < trim_size; i++) {
+        new[i] = input[old_len - trim_size + i];
+    }
+
+    new[trim_size] = '\0';
+
+    return new;
+}
+
+
+/**
  * Frees and nulls all provided pointers.
  *
  * Usage:
